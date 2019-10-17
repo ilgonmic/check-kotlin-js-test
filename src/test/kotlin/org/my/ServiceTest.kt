@@ -2,6 +2,7 @@ package org.my
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 
 class ServiceTest {
@@ -21,5 +22,12 @@ class ServiceTest {
     fun valueFailTest2() {
         console.warn("FROM VALUE FAIL TEST 2")
         assertEquals("valueqwqw", Service().value())
+    }
+
+    class Inner {
+        @Test
+        fun testHello() {
+            assertTrue { false }
+        }
     }
 }

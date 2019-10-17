@@ -13,3 +13,5 @@ fun main() {
     console.error("MY MAIN FAIL")
     Service().value()
 }
+
+fun foo() = "sdads"

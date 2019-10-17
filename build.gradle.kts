@@ -14,6 +14,10 @@ kotlin {
 
         useCommonJs()
         browser {
+            dceTask {
+                keep += "check-kotlin-js-test.org.my.foo"
+            }
+
             testTask {
                 //                testLogging {
 //                    showExceptions = true
@@ -57,4 +61,8 @@ kotlin {
             }
         }
     }
+}
+
+val foo by tasks.registering {
+    println("FOO")
 }
