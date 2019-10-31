@@ -2,6 +2,7 @@ import kotlin.js.Promise
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
+//@Ignore
 class MyTest {
     @Test
     fun foo() {

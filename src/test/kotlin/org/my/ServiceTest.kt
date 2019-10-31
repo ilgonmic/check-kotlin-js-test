@@ -29,5 +29,19 @@ class ServiceTest {
         fun testHello() {
             assertTrue { false }
         }
+
+        class Inner2 {
+            @Test
+            fun testHello() {
+                assertTrue { false }
+            }
+
+            class Inner3 {
+                @Test
+                fun testHello() {
+                    assertTrue { false }
+                }
+            }
+        }
     }
 }

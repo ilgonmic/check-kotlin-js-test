@@ -2,8 +2,6 @@ plugins {
     id("org.jetbrains.kotlin.js") version "1.3-SNAPSHOT"
 }
 
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -16,6 +14,9 @@ kotlin {
         browser {
             dceTask {
                 keep += "check-kotlin-js-test.org.my.foo"
+                dceOptions {
+                    outputDirectory = "$buildDir/js/packages/${project.name}/kotlin-dce-2"
+                }
             }
 
             testTask {
@@ -27,6 +28,8 @@ kotlin {
 //                }
                 useKarma {
                     useChromeHeadless()
+//                    useChrome()
+//                    useSafari()
 //                    useIe()
 //                    useFirefox()
 //                    useOpera()
@@ -61,8 +64,4 @@ kotlin {
             }
         }
     }
-}
-
-val foo by tasks.registering {
-    println("FOO")
 }
