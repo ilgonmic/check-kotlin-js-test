@@ -7,6 +7,10 @@ repositories {
     mavenLocal()
 }
 
+dependencies {
+    implementation(npm(name = "42"))
+}
+
 kotlin {
     target {
 
@@ -52,8 +56,6 @@ kotlin {
             main {
                 dependencies {
                     implementation(kotlin("stdlib-js"))
-                    implementation(npm("dukat"))
-                    implementation(npm("mocha"))
                 }
             }
 
