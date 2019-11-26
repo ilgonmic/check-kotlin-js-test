@@ -8,7 +8,10 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-js"))
     implementation(npm(name = "42"))
+
+    testImplementation(kotlin("test-js"))
 }
 
 kotlin {
@@ -49,20 +52,6 @@ kotlin {
 //                    showCauses = true
 //                    showStackTraces = true
 //                }
-            }
-        }
-
-        sourceSets {
-            main {
-                dependencies {
-                    implementation(kotlin("stdlib-js"))
-                }
-            }
-
-            test {
-                dependencies {
-                    implementation(kotlin("test-js"))
-                }
             }
         }
     }
