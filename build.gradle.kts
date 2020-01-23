@@ -1,5 +1,7 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.3-SNAPSHOT"
+    id("org.jetbrains.kotlin.js") version "1.4-SNAPSHOT"
+    id("com.dorongold.task-tree") version "1.4"
+    id("maven-publish")
 }
 
 repositories {
@@ -7,9 +9,13 @@ repositories {
     mavenLocal()
 }
 
+group = "com.ilgonmic"
+version = "1.0-SNAPSHOT"
+
 dependencies {
     implementation(kotlin("stdlib-js"))
-    implementation(npm(name = "42"))
+//    "legacyImplementation"(kotlin("stdlib-js"))
+//    implementation(npm(name = "42"))
 
     testImplementation(kotlin("test-js"))
 }
@@ -19,12 +25,14 @@ kotlin {
 
         useCommonJs()
         browser {
-            dceTask {
-                keep += "check-kotlin-js-test.org.my.foo"
-                dceOptions {
-                    outputDirectory = "$buildDir/js/packages/${project.name}/kotlin-dce-2"
-                }
-            }
+//            dceTask {
+//                keep += "check-kotlin-js-test.org.my.foo"
+//                dceOptions {
+//                    outputDirectory = "$buildDir/js/packages/${project.name}/kotlin-dce-2"
+//                }
+//            }
+
+            produceKotlinLibrary()
 
             testTask {
                 //                testLogging {
@@ -45,6 +53,7 @@ kotlin {
         }
 
         nodejs {
+            produceKotlinLibrary()
             testTask {
                 //                testLogging {
 //                    showExceptions = true
@@ -53,6 +62,25 @@ kotlin {
 //                    showStackTraces = true
 //                }
             }
+        }
+    }
+
+    sourceSets.all {
+        println("SOURCE SET $this")
+    }
+}
+
+(project.extensions.getByName("kotlin") as org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension).apply {
+    sourceSets.all {
+        println("SOURCE SET $this")
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["kotlin"])
+//            setArtifacts(listOf("$buildDir/libs/check-kotlin-js-test-1.0-SNAPSHOT.klib"))
         }
     }
 }
