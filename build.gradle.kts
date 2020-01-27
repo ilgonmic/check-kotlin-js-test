@@ -24,6 +24,7 @@ kotlin {
     target {
 
         useCommonJs()
+
         browser {
 //            dceTask {
 //                keep += "check-kotlin-js-test.org.my.foo"
@@ -31,8 +32,6 @@ kotlin {
 //                    outputDirectory = "$buildDir/js/packages/${project.name}/kotlin-dce-2"
 //                }
 //            }
-
-            produceKotlinLibrary()
 
             testTask {
                 //                testLogging {
@@ -53,7 +52,6 @@ kotlin {
         }
 
         nodejs {
-            produceKotlinLibrary()
             testTask {
                 //                testLogging {
 //                    showExceptions = true
@@ -63,6 +61,7 @@ kotlin {
 //                }
             }
         }
+        produceKotlinLibrary()
     }
 
     sourceSets.all {
