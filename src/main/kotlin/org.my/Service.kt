@@ -1,6 +1,5 @@
 package org.my
 
-
 class Service {
     fun value(): String {
         console.error("MY FAIL")

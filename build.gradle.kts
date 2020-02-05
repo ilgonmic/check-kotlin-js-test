@@ -16,6 +16,7 @@ dependencies {
     implementation(kotlin("stdlib-js"))
 //    "legacyImplementation"(kotlin("stdlib-js"))
 //    implementation(npm(name = "42"))
+//    implementation("com.ilgonmic:shared:1.0-SNAPSHOT")
 
     testImplementation(kotlin("test-js"))
 }
@@ -25,31 +26,31 @@ kotlin {
 
         useCommonJs()
 
-        browser {
+//        browser {
 //            dceTask {
 //                keep += "check-kotlin-js-test.org.my.foo"
 //                dceOptions {
 //                    outputDirectory = "$buildDir/js/packages/${project.name}/kotlin-dce-2"
 //                }
 //            }
-
-            testTask {
-                //                testLogging {
-//                    showExceptions = true
-//                    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-//                    showCauses = true
-//                    showStackTraces = true
+//
+//            testTask {
+//                //                testLogging {
+////                    showExceptions = true
+////                    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+////                    showCauses = true
+////                    showStackTraces = true
+////                }
+//                useKarma {
+//                    useChromeHeadless()
+////                    useChrome()
+////                    useSafari()
+////                    useIe()
+////                    useFirefox()
+////                    useOpera()
 //                }
-                useKarma {
-                    useChromeHeadless()
-//                    useChrome()
-//                    useSafari()
-//                    useIe()
-//                    useFirefox()
-//                    useOpera()
-                }
-            }
-        }
+//            }
+//        }
 
         nodejs {
             testTask {
@@ -61,13 +62,28 @@ kotlin {
 //                }
             }
         }
-        produceKotlinLibrary()
+        produceExecutable()
     }
 
     sourceSets.all {
         println("SOURCE SET $this")
     }
 }
+
+val suffices = listOf(
+    "Compile",
+    "Runtime",
+    "CompileOnly",
+    "RuntimeOnly",
+    "Default"
+)
+
+project.configurations
+    .filter { suffices.any { p -> it.name.endsWith(p) } }
+    .forEach {
+        println(it)
+        it.isCanBeConsumed = false
+    }
 
 (project.extensions.getByName("kotlin") as org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension).apply {
     sourceSets.all {
